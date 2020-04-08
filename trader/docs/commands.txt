@@ -1,0 +1,56 @@
+
+# Register Trader
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "JP Morgen",
+        "password": "123456",
+        "secretKey": "11111"
+    }' localhost:8899/traders
+
+
+# Get one Trader
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8899/traders/1
+
+# add Account
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "BN6776d",
+        "password": "123456"
+
+    }' localhost:8899/accounts
+
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "RD57B",
+        "password": "123456"
+    }' localhost:8899/accounts
+
+# Get one Account
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8899/accounts/BN6776d
+
+
+
+ # IPO
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "name": "Tesla motor Inc",
+             "traderId": 1,
+            "nos": "100000",
+             "account": "BN6776d",
+            "price": 1000
+        }' localhost:8899/stocks/ipo
+
+
+#bid
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "traderId": 1,
+            "nos": "100000",
+            "price": 550,
+            "account": "BN6776d",
+            "buy": false
+
+        }' localhost:8899/bids
+# Get one Bid
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8899/bids/1
+

@@ -1,0 +1,80 @@
+ java  -jar ./build/libs/exchange-1.0-SNAPSHOT.jar  --spring.profiles.active=dev --MYSQL_HOST=127.0.0.1 --MYSQL_PORT=332--MYSQL_USERNAME=root --MYSQL_PASSWORD=r00t --server.port=8888
+
+docker-compose up
+
+
+# Register Trader
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "JP Morgen",
+        "secretKey": "11111",
+        "balance": 1000
+    }' localhost:8888/traders
+
+
+# Get one Trader
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8888/traders/1
+
+
+
+# add Account
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "BN6776d",
+        "password": "123456",
+          "traderId": 1
+    }' localhost:8888/accounts
+
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "RD57B",
+        "password": "123456",
+         "traderId": 1
+    }' localhost:8888/accounts
+
+# Get one Account
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8888/accounts/BN6776d
+
+
+
+ # IPO
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "name": "Tesla motor Inc",
+            "nos": "100000"
+        }' localhost:8888/stocks/list
+
+
+
+
+# quote
+curl -i -H "Content-Type: application/json" -X GET localhost:8888/stocks/tsla
+
+curl -i -H "Content-Type: application/json" -X GET localhost:8888/quote/tsla
+
+#bid sell
+
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "trader": 1,
+            "nos": "100000",
+            "price": 550,
+            "account": "BN6776d",
+            "buy": false
+
+        }' localhost:8888/bids
+# Get one Bid
+
+
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "trader": 1,
+            "nos": "100000",
+            "price": 550,
+            "account": "BN6776d",
+            "buy": true
+
+        }' localhost:8888/bids
+# Get one Bid
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8888/bids/1
+
