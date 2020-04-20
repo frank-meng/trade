@@ -6,13 +6,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource()
+public interface PositionRepository extends CrudRepository<Position, Integer> {
 
-public interface TransactionRepository extends CrudRepository<Transaction, Integer> {
+    Position findById(int id);
 
-    Transaction findById(int id);
-    List<Transaction> findByAccount(Account account);
+    List<Position> findByAccount(Account account);
 
-
-    List<Transaction> findBySymbol(String symbol);
 
 }

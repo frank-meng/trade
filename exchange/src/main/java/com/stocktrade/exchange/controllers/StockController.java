@@ -1,11 +1,11 @@
 package com.stocktrade.exchange.controllers;
 
 
-import com.stocktrade.exchange.dto.AccountDto;
 import com.stocktrade.exchange.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -29,11 +29,13 @@ public class StockController {
 
     @GetMapping("/stocks/{symbol}")
     public Stock getStock(@PathVariable("symbol") String symbol){
-        return stockRepository.findBySymbol(symbol.toUpperCase());
+        Stock stock = stockRepository.findBySymbol(symbol.toUpperCase());
+
+        if (stock ==null)
+            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Stock Symbol Not Found");
+
+        return stock;
     }
 
-    @GetMapping("/quote/{symbol}")
-    public Integer getQuote(@PathVariable("symbol") String symbol){
-        return stockRepository.findBySymbol(symbol.toUpperCase()).getLastPrice();
-    }
+
 }

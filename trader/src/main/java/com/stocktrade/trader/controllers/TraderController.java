@@ -1,6 +1,8 @@
 package com.stocktrade.trader.controllers;
 
-import com.stocktrade.trader.dto.AccountDto;
+import com.stocktrade.trader.TraderConfig;
+import com.stocktrade.trader.dto.ExchangeAccount;
+import com.stocktrade.trader.exceptions.UserNotFoundException;
 import com.stocktrade.trader.models.*;
 import com.stocktrade.trader.service.ExchangeService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,62 +11,79 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
 public class TraderController {
 
     @Autowired
-    private TraderRepository traderRepository;
+    private UserRepository userRepository;
+
     @Autowired
     private AccountRepository acountRepository;
-
-    static int TRADER_ID;
 
     @Autowired
     private ExchangeService exchange;
 
+    @Autowired
+    private TraderConfig config;
+
+    /*
     @PostMapping("/traders")
     @ResponseStatus(HttpStatus.CREATED)
-
 
     public Trader registerTrader(@Valid @RequestBody Trader trader){
 
         Trader returnedTrader = exchange.registerTrader(trader);
         TRADER_ID = returnedTrader.getId();
-
-        returnedTrader = traderRepository.save(returnedTrader);
         return returnedTrader;
     }
+*/
 
 
-    @GetMapping("/traders/{id}")
-    public Trader getTrader(@PathVariable("id") int traderId){
-
-        return traderRepository.findById(traderId);
+    @PostMapping("/users")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerUser(@Valid @RequestBody User user){
+        userRepository.save(user);
     }
 
+    @GetMapping("/users/{name}")
+    public User getUser(@PathVariable("name") String userName){
+        return userRepository.findByName(userName);
+    }
+
+    @GetMapping("/accounts")
+    public List<Account> getAccounts(@PathVariable("name") String userName) throws UserNotFoundException {
+        User u = userRepository.findByName(userName);
+        if (u == null) throw new UserNotFoundException();
+
+
+        return u.getAccounts();
+    }
 
     @PostMapping("/accounts")
     @ResponseStatus(HttpStatus.CREATED)
-    public Account registerAccount(@Valid @RequestBody Account acct){
+    public Account registerAccount(@Valid @RequestBody Account acct) throws UserNotFoundException {
 
-        System.out.println("******         "+acct.toString());
-        AccountDto dto = new AccountDto();
-        dto.setName(acct.getName());
-        dto.setPassword(acct.getPassword());
-        dto.setTraderId(TRADER_ID);
+        User u = userRepository.findByName(acct.getUserName());
 
-        exchange.registerAccount(dto);
+        if (u == null) throw new UserNotFoundException();
+
+        ExchangeAccount ea = new ExchangeAccount();
+        ea.setName(acct.getName());
+        ea.setTraderId(config.getTraderId());
+
+        exchange.registerAccount(ea);
+
+        acct.setUser(u);
         acct = acountRepository.save(acct);
         return acct;
     }
+
     @GetMapping("/accounts/{name}")
-    public Account getAccount(@PathVariable("name") String acctId){
-
-        return acountRepository.findByName(acctId);
+    public Account getAccount(@PathVariable("name") String acctName){
+        return exchange.getAccount (acctName);
     }
-
-
 
 }

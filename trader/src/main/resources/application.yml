@@ -1,2 +1,18 @@
-server:
-  port : 8899
+
+exchangeURL: ${EXCHANGE_URL}
+traderId: ${TRADER_ID}
+
+spring:
+  profiles: dev
+  application:
+    name: trader
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/trader
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+

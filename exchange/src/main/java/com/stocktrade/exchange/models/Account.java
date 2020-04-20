@@ -10,23 +10,34 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "ACCOUNT", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name", name = "uniqueAccountNameConstraint")})
 
 @ToString
 @Getter @Setter  @NoArgsConstructor
 
 public class Account implements Serializable {
 
-    private @Id String name;
-    private int buyingPower;
-    private int balance;
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Integer id;
+
+    private String name;
 
     @ManyToOne
     @JoinColumn
     @JsonBackReference
     private Trader trader;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Position> holdings;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Transaction> transactions;
 
 }

@@ -13,8 +13,6 @@ public class ExchangeIpo {
     private String symbol;
 
     private String name;
-    int traderId;  //tobe removed
-
     int nos;
 
     public ExchangeIpo(String symbol, String name, int nos) {

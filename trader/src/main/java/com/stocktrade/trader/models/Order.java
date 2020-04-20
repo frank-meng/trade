@@ -1,8 +1,6 @@
 package com.stocktrade.trader.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,19 +8,26 @@ import lombok.ToString;
 
 import java.util.Date;
 
+
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction {
+public class Order {
 
     private Integer id;
 
-    @JsonBackReference
-    private Account account;
+    private String  accountName;
 
     private String symbol;
-    private boolean buy;
     private int price;
+
+    private boolean buy;
     int nos;
+
     Date date;
+    private OrderStatus status;
+
+    int remaining;
+
 }

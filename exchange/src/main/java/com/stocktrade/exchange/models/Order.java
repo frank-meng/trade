@@ -1,38 +1,30 @@
 package com.stocktrade.exchange.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "TRANSACTION")
-@ToString
+@Table(name = "STOCKORDER")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transaction {
-
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String symbol;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    @JsonBackReference
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
 
+    private String symbol;
     private int price;
     private boolean buy;
     int nos;
-    private TransactionStatus status;
-
     Date date;
-
+    private OrderStatus status;
+    int remaining;
 }

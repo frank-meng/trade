@@ -8,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "TRADER")
@@ -21,6 +20,5 @@ public class Trader {
     int id;
 
     private String secretKey;
-    int balance;
     String name;
 }

@@ -1,31 +1,25 @@
 package com.stocktrade.trader.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "HOLDING")
-@ToString
 @Getter
 @Setter
 @NoArgsConstructor
 public class Position {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Account account;
 
     private String symbol;
+    private int nos;
+    private int bookPrice;
 
-    int nos;
-
-    Date date;
+    private Date date;
 }

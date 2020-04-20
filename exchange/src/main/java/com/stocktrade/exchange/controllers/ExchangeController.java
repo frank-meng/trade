@@ -46,10 +46,7 @@ public class ExchangeController {
         Trader trader = traderRepository.findById(tId);
 
         Account acct = new Account();
-        acct.setBalance(dto.getBalance());
         acct.setName(dto.getName());
-        acct.setBuyingPower(dto.getBuyingPower());
-        acct.setPassword(dto.getPassword());
         acct.setTrader(trader);
 
       //  acct = acountRepository.save(acct);
@@ -59,9 +56,9 @@ public class ExchangeController {
         traderRepository.save(trader);
     }
     @GetMapping("/accounts/{name}")
-    public Account getAccount(@PathVariable("name") String acctId){
+    public Account getAccount(@PathVariable("name") String acctName){
 
-        return acountRepository.findByName(acctId);
+        return acountRepository.findByName(acctName);
     }
 
 }

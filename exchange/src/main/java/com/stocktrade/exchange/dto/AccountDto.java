@@ -16,10 +16,6 @@ import java.io.Serializable;
 public class AccountDto implements Serializable {
 
     private String name;
-    private int buyingPower;
-    private int balance;
-    private String password;
-
     private Integer traderId;
 
 }

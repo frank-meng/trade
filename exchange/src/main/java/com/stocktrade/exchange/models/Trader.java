@@ -5,12 +5,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "TRADER")
-@ToString
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,12 +24,10 @@ public class Trader {
     @NotBlank
     private String name;
 
-    private int balance;
-
     @NotBlank
     private String secretKey;
 
-    @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trader", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonManagedReference
     Set<Account> accounts;
 
