@@ -2,6 +2,10 @@
 exchangeURL: ${EXCHANGE_URL}
 traderId: ${TRADER_ID}
 
+server:
+  servlet:
+    context-path: /quicktrade
+
 spring:
   profiles: dev
   application:
@@ -15,4 +19,10 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/frankrealm
+          jwk-set-uri: http://localhost:8080/auth/realms/frankrealm/protocol/openid-connect/certs
 
