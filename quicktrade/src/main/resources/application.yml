@@ -2,10 +2,6 @@
 exchangeURL: ${EXCHANGE_URL}
 traderId: ${TRADER_ID}
 
-server:
-  servlet:
-    context-path: /quicktrade
-
 spring:
   profiles: dev
   application:

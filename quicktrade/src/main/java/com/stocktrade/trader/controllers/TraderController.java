@@ -8,13 +8,18 @@ import com.stocktrade.trader.service.ExchangeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-@Slf4j
+
 @RestController
+@CrossOrigin
 public class TraderController {
 
     @Autowired
@@ -42,18 +47,28 @@ public class TraderController {
 */
 
 
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     @ResponseStatus(HttpStatus.CREATED)
     public void registerUser(@Valid @RequestBody User user){
         userRepository.save(user);
     }
 
-    @GetMapping("/users/{name}")
+    @GetMapping("/api/users/{name}")
     public User getUser(@PathVariable("name") String userName){
         return userRepository.findByName(userName);
     }
 
-    @GetMapping("/accounts")
+    @GetMapping("/api/user/info")
+    public User getUserInfo(@AuthenticationPrincipal Jwt principal) {
+
+        Map<String, Object> userMap =  Collections.singletonMap("user_name", principal.getClaimAsString("preferred_username"));
+        String userName = userMap.get("user_name").toString();
+
+        return userRepository.findByName(userName);
+
+    }
+
+    @GetMapping("/api/accounts")
     public List<Account> getAccounts(@PathVariable("name") String userName) throws UserNotFoundException {
         User u = userRepository.findByName(userName);
         if (u == null) throw new UserNotFoundException();
@@ -62,7 +77,7 @@ public class TraderController {
         return u.getAccounts();
     }
 
-    @PostMapping("/accounts")
+    @PostMapping("/api/accounts")
     @ResponseStatus(HttpStatus.CREATED)
     public Account registerAccount(@Valid @RequestBody Account acct) throws UserNotFoundException {
 
@@ -81,7 +96,7 @@ public class TraderController {
         return acct;
     }
 
-    @GetMapping("/accounts/{name}")
+    @GetMapping("/api/accounts/{name}")
     public Account getAccount(@PathVariable("name") String acctName){
         return exchange.getAccount (acctName);
     }

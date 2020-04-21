@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class OrderController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class OrderController {
     @Autowired
     private TraderConfig config;
 
-    @PostMapping("/stocks/ipo")
+    @PostMapping("/api/stocks/ipo")
     @ResponseStatus(HttpStatus.CREATED)
     public Order startIpo(@Valid @RequestBody Ipo ipo){
 
@@ -46,12 +47,12 @@ public class OrderController {
     }
 
 
-    @GetMapping("/stocks/{symbol}")
+    @GetMapping("/api/stocks/{symbol}")
     public Stock getQuote(@PathVariable("symbol") String symbol){
         return exchange.getQuote(symbol);
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/api/orders")
     @ResponseStatus(HttpStatus.CREATED)
     public Integer placerOrder(@Valid @RequestBody Order order){
 
@@ -64,7 +65,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/orders/{id}")
+    @GetMapping("/api/orders/{id}")
     public Order getOrder(@PathVariable("id") int orderId){
 
         Order order = exchange.checkOrder(orderId);
@@ -76,7 +77,7 @@ public class OrderController {
         return order;
     }
 
-    @GetMapping("/orders/account/{accountName}")
+    @GetMapping("/api/orders/account/{accountName}")
     public List<Order> getBid(@PathVariable("accountName") String accountName){
 
         List<Order> orders = exchange.getOrdersByAccount(accountName);

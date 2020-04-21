@@ -1,0 +1,79 @@
+
+# Register Trader
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "JP Morgen",
+        "password": "123456",
+        "secretKey": "11111"
+    }' localhost:8899/traders
+
+
+# Get one Trader
+curl -i -H "Content-Type: application/json" \
+    -X GET localhost:8899/traders/1
+
+# add User
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "user1",
+        "firstName": "frank",
+        "lastName": "Meng",
+        "password": "123456"
+    }' localhost:8899/api/users
+
+# Get one user by name
+curl -i -H "Content-Type: application/json" -X GET localhost:8899/api/user/info
+
+
+# add Account
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "BN6776d",
+        "userName": "frank",
+        "balance": 10000
+    }' localhost:8899/accounts
+
+curl -i -H "Content-Type: application/json" -X POST -d '{
+        "name": "RD57B",
+         "userName": "frank",
+          "balance": 10000
+    }' localhost:8899/api/accounts
+
+# Get one Account
+curl -i -H "Content-Type: application/json" -X GET localhost:8899/accounts/RD57B
+
+
+
+ # IPO
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "name": "Tesla motor Inc",
+             "traderId": 1,
+            "nos": "100000",
+             "accountName": "BN6776d",
+            "price": 1000
+        }' localhost:8899/stocks/ipo
+
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "AAPL",
+            "name": "AAPL",
+             "traderId": 1,
+            "nos": "100000",
+             "accountName": "BN6776d",
+            "price": 1000
+        }' localhost:8899/stocks/ipo
+
+#order
+ curl -i -H "Content-Type: application/json" -X POST -d '{
+            "symbol": "TSLA",
+            "nos": "100",
+            "price": 550,
+            "accountName": "CARD57B",
+            "buy": false
+
+        }' localhost:8899/orders
+
+# Get one Bid
+curl -i -H "Content-Type: application/json" -X GET localhost:8899/orders/1
+
+# Get orders from account
+curl -i -H "Content-Type: application/json" -X GET localhost:8899/orders/account/CARD57B
+
+
