@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
-@Table(name = "TRADER")
+@Table(name = "TRADERS")
 
 @Getter
 @Setter

@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "HOLDING")
+@Table(name = "HOLDINGS")
 @ToString
 @Getter
 @Setter
@@ -19,6 +19,7 @@ import java.util.Date;
 public class Position {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)

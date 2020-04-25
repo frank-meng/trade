@@ -19,7 +19,7 @@ public interface ExchangeService {
 
     public void list(ExchangeIpo ipo);
 
-    public Stock getQuote(String symbol);
+    public Stock getStock(String symbol);
 
     public Integer placeOrder(Order req);
 

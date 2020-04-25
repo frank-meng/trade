@@ -46,7 +46,7 @@ curl -i -H "Content-Type: application/json" \
 
 
 # quote
-curl -i -H "Content-Type: application/json" -X GET localhost:8888/quote/tsla
+curl -i -H "Content-Type: application/json" -X GET localhost:8888/stocks/tsla
 
 
 #order sell

@@ -69,7 +69,11 @@ public class TraderController {
     }
 
     @GetMapping("/api/accounts")
-    public List<Account> getAccounts(@PathVariable("name") String userName) throws UserNotFoundException {
+    public List<Account> getAccounts(@AuthenticationPrincipal Jwt principal) throws UserNotFoundException {
+
+        Map<String, Object> userMap =  Collections.singletonMap("user_name", principal.getClaimAsString("preferred_username"));
+        String userName = userMap.get("user_name").toString();
+
         User u = userRepository.findByName(userName);
         if (u == null) throw new UserNotFoundException();
 

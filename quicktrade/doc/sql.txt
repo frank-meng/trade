@@ -9,6 +9,7 @@ insert into trader values (1,"JP Morgen","12341234")
 
 insert into users  (first_name, last_name, name, password) values ("Frank", "Meng", "user1","123456")
 
-insert into accounts values  ("RD57B",36000,36000,"12341234")
+insert into accounts   (name, user_id, type, balance) values ("RD57B",1,"CASH",36000)
 
+insert into accounts   (name, user_id, type, balance) values ("BN6776d",1,"RRSP",375200)
 

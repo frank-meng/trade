@@ -56,8 +56,8 @@ public class ExchangeServiceImpl implements ExchangeService{
     }
 
     @Override
-    public Stock getQuote(String symbol){
-        return exchangeClient.getQuote(symbol);
+    public Stock getStock(String symbol){
+        return exchangeClient.getStock(symbol);
     }
 
 

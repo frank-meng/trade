@@ -48,8 +48,8 @@ public class OrderController {
 
 
     @GetMapping("/api/stocks/{symbol}")
-    public Stock getQuote(@PathVariable("symbol") String symbol){
-        return exchange.getQuote(symbol);
+    public Stock getStock(@PathVariable("symbol") String symbol){
+        return exchange.getStock(symbol);
     }
 
     @PostMapping("/api/orders")

@@ -6,19 +6,18 @@ use exchange
 
 show tables
 
-insert into trader values (1, "JP Morgen","12341234")
+insert into traders (name, secret_key) values ( "JP Morgen","12341234")
 
-insert into stock values ("AAPL", 100)
-insert into stock values ("TSLA", 300)
+insert into stocks  values ("AAPL", 100)
+insert into stocks values ("TSLA", 300)
 
-insert into account values  ("RD57B",1)
-insert into account values  ("BN6776d",1)
+insert into accounts (name, trader_id) values  ("RD57B",1)
+insert into accounts (name, trader_id) values  ("BN6776d",1)
 
-insert into holding values (1,300, null, 20, "TSLA","RD57B")
-insert into holding values (2,100, null, 125, "AAPL","RD57B")
+insert into holdings (book_price, nos, symbol, account_id) values (300, 20, "TSLA",1)
+insert into holdings  (book_price, nos, symbol, account_id) values (100, 125, "AAPL",2)
 
-insert into holding values (4,100, null, 125, "AAPL","BN6776d")
 
-insert into transaction values (1,1,null, 50 ,100, 0, "AAPL","RD57B")
+insert into transactions (buy, nos, price, status,symbol, account_id) values (1,125 ,100, 0, "AAPL",2)
 
 

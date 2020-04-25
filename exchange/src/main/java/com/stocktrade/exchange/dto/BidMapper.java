@@ -12,6 +12,7 @@ public class BidMapper {
         //set value back
         dto.setId(order.getId());
         dto.setDate(order.getDate());
+        dto.setPrice(order.getPrice());
         dto.setSymbol(order.getSymbol());
         dto.setStatus(order.getStatus());
         dto.setRemaining(order.getRemaining());
@@ -27,10 +28,11 @@ public class BidMapper {
 
         order.setBuy(dto.isBuy());
         order.setSymbol(dto.getSymbol());
+        order.setPrice(dto.getPrice());
         order.setDate(new Date());
         order.setStatus(dto.getStatus());
-
-        order.setRemaining(order.getNos());
+        order.setNos(dto.getNos());
+        order.setRemaining(dto.getNos());
         return order;
     }
 }

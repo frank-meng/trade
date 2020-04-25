@@ -47,9 +47,6 @@ public class OrderController {
         order.setAccount(account);
 
         order.setStatus(OrderStatus.OPEN); // open
-
-        order.setRemaining(order.getNos());
-
         order = orderRepository.save(order);
 
         return order.getId();

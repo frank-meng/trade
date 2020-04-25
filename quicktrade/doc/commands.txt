@@ -27,12 +27,14 @@ curl -i -H "Content-Type: application/json" -X GET localhost:8899/api/user/info
 curl -i -H "Content-Type: application/json" -X POST -d '{
         "name": "BN6776d",
         "userName": "frank",
+        "type": "CASH",
         "balance": 10000
     }' localhost:8899/accounts
 
 curl -i -H "Content-Type: application/json" -X POST -d '{
         "name": "RD57B",
          "userName": "frank",
+         "type": "RRSP",
           "balance": 10000
     }' localhost:8899/api/accounts
 

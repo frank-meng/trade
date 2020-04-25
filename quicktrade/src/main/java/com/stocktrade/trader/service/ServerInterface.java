@@ -33,7 +33,7 @@ public interface ServerInterface {
 
     @RequestLine("GET /stocks/{symbol}")
     @Headers("Content-Type: application/json")
-    Stock getQuote(String symbol);
+    Stock getStock(@Param("symbol") String symbol);
 
     @RequestLine("POST /orders")
     @Headers("Content-Type: application/json")
