@@ -19,6 +19,6 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/auth/realms/frankrealm
-          jwk-set-uri: http://localhost:8080/auth/realms/frankrealm/protocol/openid-connect/certs
+          issuer-uri: ${JWT_ISSUER_URL}
+          jwk-set-uri: ${JWT_ISSUER_URL}/protocol/openid-connect/certs
 
