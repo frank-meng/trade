@@ -25,7 +25,7 @@ public class Account implements Serializable {
     private Integer id;
 
     private String name;
-    private String type;
+    private String category;
     private int balance;
 
     @ManyToOne(fetch = FetchType.LAZY)
